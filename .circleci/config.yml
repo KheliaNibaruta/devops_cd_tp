@@ -124,7 +124,7 @@ jobs:
           command: git push https://heroku:9df2d0c0-9bc3-4469-b9f2-8cb3f0702d42@git.heroku.com/salty-journey-63595.git HEAD:master
       - run:
           name: Smoke Test
-          command: HTTPCODE=`curl -s -o /dev/null -w "%{http_code}" https://salty-journey-63595.herokuapp.com/`
+          command: HTTPCODE=$(echo `curl -s -o /dev/null -w "%{http_code}" https://salty-journey-63595.herokuapp.com/` | tr -d ' ')
             if [ "$HTTPCODE" -ne 200 ];
             echo "heroku app not responding, failing deploy"
             exit 1
